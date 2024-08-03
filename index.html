@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational Msg App </title>
+    <style>
+        * {
+            font-size: 50px;
+            font-family: Cambria;
+            box-sizing: border-box;
+        }
+        h1 {
+            background-color: white; /* Background color of the box */
+            padding: 20px; /* Space inside the box */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for a 3D effect */
+            margin: 0; /* Remove default margin */
+        }
+        h2 {
+            width: 50%; /* Decreased width from 60% to 50% */
+            font-size: 30px; /* Decreased font size by an additional 10px */
+            border-radius: 30px;
+            border: solid;
+            text-align: center;
+            padding: 5px; /* Decreased padding by an additional 10px */
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background for readability */
+        }
+        body {
+            background-image: url('https://www.itl.cat/pngfile/big/302-3026255_motivational-wallpaper-on-the-road-to-success-success.jpg'); /* Replace with your background image URL */
+            background-size: cover; /* Ensures the background covers the entire viewport */
+            background-position: center; /* Centers the background image */
+            background-repeat: no-repeat; /* Prevents background image from repeating */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px; /* Space between the elements */
+            height: 100vh; /* Full viewport height */
+        }
+        .button-container {
+            margin: 20px 0; /* Space around the button */
+        }
+        input[type="submit"] {
+            font-size: 30px; /* Decreased font size by 20px from default size */
+            padding: 10px 20px; /* Adjust padding as needed */
+            border-radius: 10px; /* Rounded corners */
+            border: 2px solid #000; /* Border styling */
+            background-color: #fff; /* Background color */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+        input[type="submit"]:hover {
+            background-color: #ddd; /* Background color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Motivational Msg App </h1>
+        <div class="button-container">
+            <form id="quoteForm">
+                <input type="submit" value="Get Message" />
+            </form>
+        </div>
+        <h2 id="msg"></h2>
+        <h2 id="aut"></h2>
+    </div>
+    <script>
+        document.getElementById("quoteForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let msg = document.getElementById("msg");
+            let aut = document.getElementById("aut");
+            let url = "https://quotes-api-self.vercel.app/quote";
+            fetch(url)
+                .then(res => res.json())
+                .then(data => {
+                    msg.innerHTML = data.quote;
+                    aut.innerHTML = data.author;
+                })
+                .catch(err => {
+                    msg.innerHTML = "Issue: " + err;
+                });
+        });
+    </script>
+</body>
+</html>
